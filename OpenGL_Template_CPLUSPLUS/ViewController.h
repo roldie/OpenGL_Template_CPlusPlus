@@ -9,9 +9,12 @@
 #import <UIKit/UIKit.h>
 #import <GLKit/GLKit.h>
 
+#import "OpenGLClass.h"
+
 
 @interface ViewController : GLKViewController{
-   
+    
+    OpenGLClass *openGLClass;
 }
 
 @property (strong, nonatomic) EAGLContext *context;

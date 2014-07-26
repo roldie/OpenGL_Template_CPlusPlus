@@ -26,6 +26,7 @@
 		03A68C9C19833A98002CE537 /* OpenGL_Template_CPLUSPLUSTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 03A68C9B19833A98002CE537 /* OpenGL_Template_CPLUSPLUSTests.m */; };
 		03A68CA719834364002CE537 /* Main_iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 03A68CA519834364002CE537 /* Main_iPad.storyboard */; };
 		03A68CA819834364002CE537 /* Main_iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 03A68CA619834364002CE537 /* Main_iPhone.storyboard */; };
+		03A68CFD19841088002CE537 /* OpenGLClass.mm in Sources */ = {isa = PBXBuildFile; fileRef = 03A68CFC19841088002CE537 /* OpenGLClass.mm */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -63,6 +64,8 @@
 		03A68C9B19833A98002CE537 /* OpenGL_Template_CPLUSPLUSTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OpenGL_Template_CPLUSPLUSTests.m; sourceTree = "<group>"; };
 		03A68CA519834364002CE537 /* Main_iPad.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main_iPad.storyboard; sourceTree = "<group>"; };
 		03A68CA619834364002CE537 /* Main_iPhone.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main_iPhone.storyboard; sourceTree = "<group>"; };
+		03A68CFB19841088002CE537 /* OpenGLClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OpenGLClass.h; sourceTree = "<group>"; };
+		03A68CFC19841088002CE537 /* OpenGLClass.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = OpenGLClass.mm; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -126,6 +129,8 @@
 		03A68C6F19833A98002CE537 /* OpenGL_Template_CPLUSPLUS */ = {
 			isa = PBXGroup;
 			children = (
+				03A68CFB19841088002CE537 /* OpenGLClass.h */,
+				03A68CFC19841088002CE537 /* OpenGLClass.mm */,
 				03A68C7819833A98002CE537 /* AppDelegate.h */,
 				03A68C7919833A98002CE537 /* AppDelegate.mm */,
 				03A68CA519834364002CE537 /* Main_iPad.storyboard */,
@@ -270,6 +275,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				03A68C8719833A98002CE537 /* ViewController.mm in Sources */,
+				03A68CFD19841088002CE537 /* OpenGLClass.mm in Sources */,
 				03A68C7A19833A98002CE537 /* AppDelegate.mm in Sources */,
 				03A68C7619833A98002CE537 /* main.mm in Sources */,
 			);

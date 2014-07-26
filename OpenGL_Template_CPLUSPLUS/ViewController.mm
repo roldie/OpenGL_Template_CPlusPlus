@@ -7,7 +7,7 @@
 //
 
 #import "ViewController.h"
-
+#include "OpenGLClass.h"
 
 @implementation ViewController
 
@@ -28,16 +28,16 @@
     
     
     //create the OpenGL instance
-   
+    openGLClass=new OpenGLClass(self.view.bounds.size.width,self.view.bounds.size.height);
     //call setupOpenGL
-   
+    openGLClass->setupOpenGL();
     
 }
 
 - (void)dealloc
 {    
     //call teardown
-    
+    openGLClass->teadDownOpenGL();
     
     if ([EAGLContext currentContext] == self.context) {
         [EAGLContext setCurrentContext:nil];
@@ -77,7 +77,10 @@
 - (void)glkView:(GLKView *)view drawInRect:(CGRect)rect
 {
     
-    //Draw your mesh here
+    glClearColor(1.0f, 1.0f, 1.0f, 1.0f);
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+    
+    openGLClass->draw();
 }
 
 
