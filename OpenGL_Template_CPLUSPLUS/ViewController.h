@@ -11,7 +11,6 @@
 
 #import "OpenGLClass.h"
 
-
 @interface ViewController : GLKViewController{
     
     OpenGLClass *openGLClass;

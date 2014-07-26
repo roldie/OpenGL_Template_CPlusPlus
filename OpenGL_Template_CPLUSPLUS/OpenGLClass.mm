@@ -7,6 +7,8 @@
 //
 
 #include "OpenGLClass.h"
+#include "lodepng.h"
+#include <vector>
 
 static GLubyte shaderText[MAX_SHADER_LENGTH];
 
@@ -51,28 +53,27 @@ void OpenGLClass::setupOpenGL(){
     //7. Get the location of the shader attribute called "normal"
     
     GLuint normalLocation=glGetAttribLocation(programObject, "normal");
-    
-    
+
     //8. Enable both locations
     
     glEnableVertexAttribArray(positionLocation);
     
     glEnableVertexAttribArray(normalLocation);
-    
 
     //9. Link the buffer data to the shader attribute locations
     
     glVertexAttribPointer(positionLocation, 3, GL_FLOAT, GL_FALSE, 32, BUFFER_OFFSET(20));
     glVertexAttribPointer(normalLocation, 3, GL_FLOAT, GL_FALSE, 32, BUFFER_OFFSET(8));
-
     
     //11. Get Location of uniforms
-    modelViewProjectionUniformLocation = glGetUniformLocation(programObject, "modelViewProjectionMatrix");
-    normalMatrixUniformLocation = glGetUniformLocation(programObject, "normalMatrix");
+    modelViewProjectionUniformLocation = glGetUniformLocation(programObject,"modelViewProjectionMatrix");
+    normalMatrixUniformLocation = glGetUniformLocation(programObject,"normalMatrix");
+    
     
     //10. Unbind the Vertex Array Object
     glBindVertexArrayOES(0);
     
+    //11. Sets the transformation
     setTransformation();
     
     
@@ -170,11 +171,10 @@ void OpenGLClass::update(){
 
 void OpenGLClass::draw(){
     
-    
-    glBindVertexArrayOES(vertexArrayObject);
-    
     glUseProgram(programObject);
     
+    glBindVertexArrayOES(vertexArrayObject);
+
     glDrawElements(GL_TRIANGLES,36,GL_UNSIGNED_INT,Box_index);
     
     glBindVertexArrayOES(0);

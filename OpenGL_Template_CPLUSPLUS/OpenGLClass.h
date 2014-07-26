@@ -16,32 +16,33 @@
 
 #define BUFFER_OFFSET(i) ((char *)NULL + (i))
 
+#define OPENGL_ES
+
 using namespace std;
 
 class OpenGLClass{
     
 private:
     
-    GLuint textureID[16];
-    GLuint programObject;
-    GLuint vertexArrayObject;
-    GLuint vertexBufferObject;
+    GLuint textureID[16];   //Array for textures
+    GLuint programObject;   //program object used to link shaders
+    GLuint vertexArrayObject; //Vertex Array Object
+    GLuint vertexBufferObject; //Vertex Buffer Object
     
-    GLint modelViewProjectionUniformLocation;
-    GLint normalMatrixUniformLocation;
-    GLint textureUniformLocation;
+    float aspect; //widthDisplay/heightDisplay ratio
+    GLint modelViewProjectionUniformLocation;  //OpenGL location for our MVP uniform
+    GLint normalMatrixUniformLocation;  //OpenGL location for the normal matrix
     
-    float aspect;
+    //Matrices for several transformation
     GLKMatrix4 projectionMatrix;
-    
     GLKMatrix4 cameraViewMatrix;
     GLKMatrix4 modelWorldMatrix;
     GLKMatrix4 modelViewMatrix;
     GLKMatrix4 modelViewProjectionMatrix;
     GLKMatrix3 normalMatrix;
     
-    float screenWidth;
-    float screenHeight;
+    float screenWidth;  //Width of current device display
+    float screenHeight; //Height of current device display
     
     
     //This is the vertices, uv coordinates and normal data of the cube we will be rendering
@@ -75,6 +76,7 @@ private:
         1.00000, 1.00000, 0.00000, -1.00000, 0.00000, 0.50000, -0.50000, -0.50000
     };
     
+    //This array is used to tell OpenGL how to draw the cube
     int Box_index[36]={
         0, 1, 2,
         2, 3, 0,
@@ -93,16 +95,26 @@ private:
     
 public:
     
+    //Constructor
     OpenGLClass(float screenWidth,float screenHeight);
     ~OpenGLClass();
     
-    void setupOpenGL();
-    void teadDownOpenGL();
+    void setupOpenGL(); //Initialize the OpenGL
+    void teadDownOpenGL(); //Destroys the OpenGL
+    
+    //loads the shaders
     void loadShaders(const char* uVertexShaderProgram, const char* uFragmentShaderProgram);
+    
+    //Set the transformation for the object
     void setTransformation();
+    
+    //updates the mesh
     void update();
+    
+    //draws the mesh
     void draw();
     
+    //files used to loading the shader
     bool loadShaderFile(const char *szFile, GLuint shader);
     void loadShaderSrc(const char *szShaderSrc, GLuint shader);
 };

@@ -27,6 +27,8 @@
 		03A68CA719834364002CE537 /* Main_iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 03A68CA519834364002CE537 /* Main_iPad.storyboard */; };
 		03A68CA819834364002CE537 /* Main_iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 03A68CA619834364002CE537 /* Main_iPhone.storyboard */; };
 		03A68CFD19841088002CE537 /* OpenGLClass.mm in Sources */ = {isa = PBXBuildFile; fileRef = 03A68CFC19841088002CE537 /* OpenGLClass.mm */; };
+		03A68D0A1984280F002CE537 /* ConcreteDirty.png in Resources */ = {isa = PBXBuildFile; fileRef = 03A68D091984280F002CE537 /* ConcreteDirty.png */; };
+		03A68D0E19842E49002CE537 /* lodepng.mm in Sources */ = {isa = PBXBuildFile; fileRef = 03A68D0D19842E49002CE537 /* lodepng.mm */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -66,6 +68,9 @@
 		03A68CA619834364002CE537 /* Main_iPhone.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main_iPhone.storyboard; sourceTree = "<group>"; };
 		03A68CFB19841088002CE537 /* OpenGLClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OpenGLClass.h; sourceTree = "<group>"; };
 		03A68CFC19841088002CE537 /* OpenGLClass.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = OpenGLClass.mm; sourceTree = "<group>"; };
+		03A68D091984280F002CE537 /* ConcreteDirty.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ConcreteDirty.png; sourceTree = "<group>"; };
+		03A68D0C19842E49002CE537 /* lodepng.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = lodepng.h; sourceTree = "<group>"; };
+		03A68D0D19842E49002CE537 /* lodepng.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = lodepng.mm; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -129,6 +134,8 @@
 		03A68C6F19833A98002CE537 /* OpenGL_Template_CPLUSPLUS */ = {
 			isa = PBXGroup;
 			children = (
+				03A68D0B19842E49002CE537 /* PNGLoader */,
+				03A68D081984280F002CE537 /* Resources */,
 				03A68CFB19841088002CE537 /* OpenGLClass.h */,
 				03A68CFC19841088002CE537 /* OpenGLClass.mm */,
 				03A68C7819833A98002CE537 /* AppDelegate.h */,
@@ -172,6 +179,23 @@
 				03A68C9819833A98002CE537 /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		03A68D081984280F002CE537 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				03A68D091984280F002CE537 /* ConcreteDirty.png */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		03A68D0B19842E49002CE537 /* PNGLoader */ = {
+			isa = PBXGroup;
+			children = (
+				03A68D0C19842E49002CE537 /* lodepng.h */,
+				03A68D0D19842E49002CE537 /* lodepng.mm */,
+			);
+			path = PNGLoader;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -255,6 +279,7 @@
 				03A68CA819834364002CE537 /* Main_iPhone.storyboard in Resources */,
 				03A68C8919833A98002CE537 /* Images.xcassets in Resources */,
 				03A68C7419833A98002CE537 /* InfoPlist.strings in Resources */,
+				03A68D0A1984280F002CE537 /* ConcreteDirty.png in Resources */,
 				03A68C8419833A98002CE537 /* Shader.vsh in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -277,6 +302,7 @@
 				03A68C8719833A98002CE537 /* ViewController.mm in Sources */,
 				03A68CFD19841088002CE537 /* OpenGLClass.mm in Sources */,
 				03A68C7A19833A98002CE537 /* AppDelegate.mm in Sources */,
+				03A68D0E19842E49002CE537 /* lodepng.mm in Sources */,
 				03A68C7619833A98002CE537 /* main.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
