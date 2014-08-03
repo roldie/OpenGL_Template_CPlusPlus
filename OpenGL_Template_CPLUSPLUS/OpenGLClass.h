@@ -33,6 +33,8 @@ private:
     GLint modelViewProjectionUniformLocation;  //OpenGL location for our MVP uniform
     GLint normalMatrixUniformLocation;  //OpenGL location for the normal matrix
     
+    GLint textureUniformLocation; //OpenGL uniform location for texture
+    
     //Matrices for several transformation
     GLKMatrix4 projectionMatrix;
     GLKMatrix4 cameraViewMatrix;
@@ -117,6 +119,8 @@ public:
     //files used to loading the shader
     bool loadShaderFile(const char *szFile, GLuint shader);
     void loadShaderSrc(const char *szShaderSrc, GLuint shader);
+    
+    void loadPNGTexture(const char *uTexture, GLenum minFilter, GLenum magFilter, GLenum wrapMode);
 };
 
 #endif /* defined(__OpenGL_Template_CPLUSPLUS__OpenGLClass__) */

@@ -54,40 +54,114 @@ void OpenGLClass::setupOpenGL(){
     
     GLuint normalLocation=glGetAttribLocation(programObject, "normal");
 
+    //7a. Get the location of the shader attribute called "texCoord"
+    
+    GLuint textureLocation=glGetAttribLocation(programObject, "texCoord");
+    
     //8. Enable both locations
     
     glEnableVertexAttribArray(positionLocation);
     
     glEnableVertexAttribArray(normalLocation);
+    
+    //8.a Enable the texture location attribute
+    glEnableVertexAttribArray(textureLocation);
 
     //9. Link the buffer data to the shader attribute locations
     
     glVertexAttribPointer(positionLocation, 3, GL_FLOAT, GL_FALSE, 32, BUFFER_OFFSET(20));
     glVertexAttribPointer(normalLocation, 3, GL_FLOAT, GL_FALSE, 32, BUFFER_OFFSET(8));
+
+    //9a. Link the the buffer data to the texture attribute location
+    glVertexAttribPointer(textureLocation, 2, GL_FLOAT, GL_FALSE, 32, BUFFER_OFFSET(0));
     
-    //11. Get Location of uniforms
+    
+    //10. Get Location of uniforms
     modelViewProjectionUniformLocation = glGetUniformLocation(programObject,"modelViewProjectionMatrix");
     normalMatrixUniformLocation = glGetUniformLocation(programObject,"normalMatrix");
     
+    //10.a Get location of texture uniform
+    textureUniformLocation=glGetUniformLocation(programObject, "Texture");
     
-    //10. Unbind the Vertex Array Object
+    
+    //11. Activate GL_TEXTURE0
+    glActiveTexture(GL_TEXTURE0);
+    
+    //11.a Generate a texture buffer
+    glGenTextures(1, &textureID[0]);
+    
+    //11.b Bind texture0
+    glBindTexture(GL_TEXTURE_2D, textureID[0]);
+    
+    //12. Load the image and set its parameter
+    loadPNGTexture("ConcreteDirty.png",GL_LINEAR, GL_LINEAR, GL_CLAMP_TO_EDGE);
+    
+    //13. Unbind the Vertex Array Object
     glBindVertexArrayOES(0);
     
-    //11. Sets the transformation
+    //14. Sets the transformation
     setTransformation();
     
     
 }
 
-void OpenGLClass::teadDownOpenGL(){
+
+void OpenGLClass::loadPNGTexture(const char *uTexture, GLenum minFilter, GLenum magFilter, GLenum wrapMode){
     
-    glDeleteBuffers(1, &vertexBufferObject);
-    glDeleteVertexArraysOES(1, &vertexArrayObject);
+    // Load file and decode image.
+    vector<unsigned char> image;
+    unsigned int width, height;
+    
+    unsigned error = lodepng::decode(image, width, height,uTexture);
     
     
-    if (programObject) {
-        glDeleteProgram(programObject);
-        programObject = 0;
+    //if there's an error, display it
+    if(error){
+        cout << "decoder error " << error << ": " << lodepng_error_text(error) << std::endl;
+    }else{
+        
+        //Flip and invert the image
+        unsigned char* imagePtr=&image[0];
+        
+        int halfTheHeightInPixels=height/2;
+        int heightInPixels=height;
+        
+        
+        //Assume RGBA for 4 components per pixel
+        int numColorComponents=4;
+        
+        //Assuming each color component is an unsigned char
+        int widthInChars=width*numColorComponents;
+        
+        unsigned char *top=NULL;
+        unsigned char *bottom=NULL;
+        unsigned char temp=0;
+        
+        for( int h = 0; h < halfTheHeightInPixels; ++h )
+        {
+            top = imagePtr + h * widthInChars;
+            bottom = imagePtr + (heightInPixels - h - 1) * widthInChars;
+            
+            for( int w = 0; w < widthInChars; ++w )
+            {
+                // Swap the chars around.
+                temp = *top;
+                *top = *bottom;
+                *bottom = temp;
+                
+                ++top;
+                ++bottom;
+            }
+        }
+        
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, wrapMode);
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, wrapMode);
+        
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, minFilter);
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, magFilter);
+        
+        glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0,
+                     GL_RGBA, GL_UNSIGNED_BYTE, &image[0]);
         
     }
     
@@ -174,10 +248,31 @@ void OpenGLClass::draw(){
     glUseProgram(programObject);
     
     glBindVertexArrayOES(vertexArrayObject);
+    
+    //1. Activate the textures
+    glActiveTexture(GL_TEXTURE0);
+    glBindTexture(GL_TEXTURE_2D, textureID[0]);
+    glUniform1i(textureUniformLocation, 0);
 
+    //2. Draw the elements
     glDrawElements(GL_TRIANGLES,36,GL_UNSIGNED_INT,Box_index);
     
     glBindVertexArrayOES(0);
+    
+}
+
+
+void OpenGLClass::teadDownOpenGL(){
+    
+    glDeleteBuffers(1, &vertexBufferObject);
+    glDeleteVertexArraysOES(1, &vertexArrayObject);
+    
+    
+    if (programObject) {
+        glDeleteProgram(programObject);
+        programObject = 0;
+        
+    }
     
 }
 

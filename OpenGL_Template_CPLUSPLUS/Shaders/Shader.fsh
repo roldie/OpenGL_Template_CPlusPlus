@@ -6,10 +6,11 @@
 //  Copyright (c) 2014 Roldie.com. All rights reserved.
 //
 
-varying lowp vec4 colorVarying;
+uniform sampler2D Texture;
+varying mediump vec2 vtextureCoord;
 
 void main()
 {
-    gl_FragColor = colorVarying;
+    gl_FragColor=texture2D(Texture,vtextureCoord.st);
     
 }
